@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caro Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Caro Game</h1>
+        <div id="board" class="board"></div>
+        <button onclick="resetBoard()" class="reset-button">Chơi game mới</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+<script>
+    const board = document.getElementById('board');
+const size = 15;
+let currentPlayer = 'X';
+let gameBoard = [];
+
+// Initialize the game board
+function initBoard() {
+    for (let i = 0; i < size; i++) {
+        gameBoard[i] = [];
+        for (let j = 0; j < size; j++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.addEventListener('click', () => {
+                if (cell.textContent === '' && !checkWinner()) {
+                    cell.textContent = currentPlayer;
+                    gameBoard[i][j] = currentPlayer;
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    if (checkWinner()) {
+                        setTimeout(() => {
+                            alert(`Player ${currentPlayer === 'X' ? 'O' : 'X'} wins!`);
+                        }, 100);
+                    }
+                }
+            });
+            board.appendChild(cell);
+        }
+    }
+}
+
+// Check for a winner
+function checkWinner() {
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (
+                j + 4 < size && 
+                gameBoard[i][j] &&
+                gameBoard[i][j] === gameBoard[i][j + 1] &&
+                gameBoard[i][j] === gameBoard[i][j + 2] &&
+                gameBoard[i][j] === gameBoard[i][j + 3] &&
+                gameBoard[i][j] === gameBoard[i][j + 4]
+            ) {
+                return true;
+            }
+            if (
+                i + 4 < size &&
+                gameBoard[i][j] &&
+                gameBoard[i][j] === gameBoard[i + 1][j] &&
+                gameBoard[i][j] === gameBoard[i + 2][j] &&
+                gameBoard[i][j] === gameBoard[i + 3][j] &&
+                gameBoard[i][j] === gameBoard[i + 4][j]
+            ) {
+                return true;
+            }
+            if (
+                i + 4 < size && j + 4 < size &&
+                gameBoard[i][j] &&
+                gameBoard[i][j] === gameBoard[i + 1][j + 1] &&
+                gameBoard[i][j] === gameBoard[i + 2][j + 2] &&
+                gameBoard[i][j] === gameBoard[i + 3][j + 3] &&
+                gameBoard[i][j] === gameBoard[i + 4][j + 4]
+            ) {
+                return true;
+            }
+            if (
+                i + 4 < size && j - 4 >= 0 &&
+                gameBoard[i][j] &&
+                gameBoard[i][j] === gameBoard[i + 1][j - 1] &&
+                gameBoard[i][j] === gameBoard[i + 2][j - 2] &&
+                gameBoard[i][j] === gameBoard[i + 3][j - 3] &&
+                gameBoard[i][j] === gameBoard[i + 4][j - 4]
+            ) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// Reset the game board
+function resetBoard() {
+    while (board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
+    gameBoard = [];
+    currentPlayer = 'X';
+    initBoard();
+}
+
+// Initialize the game board when the page loads
+document.addEventListener('DOMContentLoaded', initBoard);
+
+</script>
+</html>

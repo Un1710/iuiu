@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        h1 {
+            color: #e91e63;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        button[type="submit"] {
+            background-color: #e91e63;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #d81b60;
+        }
+        
+        .loading-text {
+            color: #666;
+            display: none;
+            font-size: 0.9em;
+        }
+        
+        /* Thanh tiến trình */
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Đăng nhập</h1>
+        <form id="login-form" onsubmit="login(event)">
+            <label for="username">Tài khoản:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <button type="submit">Đăng nhập</button>
+        </form>
+        <p class="loading-text">Đang xử lý...</p>
+
+        <!-- Thanh tiến trình -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </div>
+
+    <script>
+        function login(event) {
+            event.preventDefault(); // Ngăn chặn gửi form mặc định
+
+            // Lấy giá trị tài khoản và mật khẩu từ form
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // So sánh với tài khoản và mật khẩu đã biết
+            if (username === "HuynhKhanhBang" && password === "17072006") {
+                // Ẩn form và hiển thị thanh tiến trình
+                var loginForm = document.getElementById("login-form");
+                var progressContainer = document.querySelector(".progress-container");
+                var loadingText = document.querySelector(".loading-text");
+
+                loginForm.style.display = "none";
+                progressContainer.style.display = "block";
+                loadingText.style.display = "block";
+
+                // Tạo hiệu ứng loading trong 10 giây
+                var progressBar = document.getElementById("progress-bar");
+                var width = 0;
+                var interval = setInterval(function() {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        // Sau khi thanh tiến trình đạt 100%, chuyển hướng đến trang web khác
+                        window.location.href = "hi.html"; // Thay đổi URL của trang web khác
+                    } else {
+                        width++;
+                        progressBar.style.width = width + "%";
+                    }
+                }, 100); // Điều chỉnh interval cho hiệu ứng mượt mà hơn (100ms = 10 giây / 100)
+            } else {
+                // Nếu tài khoản và mật khẩu không đúng, hiển thị thông báo lỗi
+                alert("Tài khoản hoặc mật khẩu không đúng.");
+            }
+        }
+    </script>
+</body>
+</html>

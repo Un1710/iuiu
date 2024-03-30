@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    grid-template-rows: repeat(15, 40px);
+    gap: 1px;
+    border: 1px solid #333;
+    margin: 20px auto;
+    background-color: #fff;
+}
+
+.board .cell {
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.board .cell:hover {
+    background-color: #ccc;
+}
+
+.reset-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+    background-color: #555;
+}
+
+#win-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: none;
+}
+
+#win-message h2 {
+    color: #e91e63;
+}
+
+#win-message p {
+    color: #333;
+    margin-top: 10px;
+}
+
+#win-message button {
+    background-color: #e91e63;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#win-message button:hover {
+    background-color: #d81b60;
+}
+/* Reset CSS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container */
+.container {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 0 10px;
+}
+
+/* Title */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Game board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(15, 30px); /* Điều chỉnh kích thước ô vuông */
+    grid-template-rows: repeat(15, 30px); /* Điều chỉnh kích thước ô vuông */
+    gap: 1px; /* Khoảng cách giữa các ô vuông */
+    border: 1px solid #333;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Cell */
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background-color: #ccc;
+}
+
+/* Reset button */
+.reset-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+    background-color: #555;
+}

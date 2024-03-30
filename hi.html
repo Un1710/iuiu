@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm ngày yêu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffccd6; /* Pink background */
+        }
+        
+        .container {
+            text-align: center;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative; /* Ensure heart images are positioned relative to this container */
+        }
+        
+        h1 {
+            color: #e91e63; /* Pink text */
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        #current-date {
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        #result {
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 10px;
+        }
+        
+        /* Heart images */
+        .heart {
+            position: absolute;
+            width: 50px; /* Adjust size as needed */
+            top: 10px;
+            left: 10px;
+            animation: heartbeat 1s infinite alternate; /* Heartbeat animation */
+        }
+        
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        /* CSS cho hai nút */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container .button-wrapper {
+            margin: 0 10px;
+        }
+
+        .button-container button {
+            background-color: #e91e63;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #d81b60;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <img src="/image/heart.png" alt="Heart" class="heart">
+            <h1>ĐẾM NGÀY YÊU</h1>
+            <p>Ngày bắt đầu: 24/03/2024 14:16:01</p>
+            <p>Ngày hiện tại: <span id="current-date"></span></p>
+            <p id="result"></p>
+        </div>
+        <div class="button-container">
+            <div class="button-wrapper">
+                <a href="caro.html"><button type="button">Chơi game</button></a>
+            </div>
+            <div class="button-wrapper">
+                <a href="truyen.html"><button type="button">Đọc truyện</button></a>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        function updateClock() {
+            // Get current date
+            var currentDate = new Date();
+            var dd = String(currentDate.getDate()).padStart(2, '0');
+            var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month starts from 0
+            var yyyy = currentDate.getFullYear();
+            var hh = String(currentDate.getHours()).padStart(2, '0');
+            var min = String(currentDate.getMinutes()).padStart(2, '0');
+            var sec = String(currentDate.getSeconds()).padStart(2, '0');
+            document.getElementById("current-date").innerHTML = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + min + ':' + sec;
+
+            // Start date
+            var startDate = new Date('03/24/2024 14:16:00');
+
+            // Calculate time difference
+            var differenceInTime = currentDate.getTime() - startDate.getTime();
+            var differenceInYears = Math.floor(differenceInTime / (1000 * 3600 * 24 * 365));
+            differenceInTime -= differenceInYears * 1000 * 3600 * 24 * 365;
+            var differenceInMonths = Math.floor(differenceInTime / (1000 * 3600 * 24 * 30));
+            differenceInTime -= differenceInMonths * 1000 * 3600 * 24 * 30;
+            var differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+            differenceInTime -= differenceInDays * 1000 * 3600 * 24;
+            var differenceInHours = Math.floor(differenceInTime / (1000 * 3600));
+            differenceInTime -= differenceInHours * 1000 * 3600;
+            var differenceInMinutes = Math.floor(differenceInTime / (1000 * 60));
+            differenceInTime -= differenceInMinutes * 1000 * 60;
+            var differenceInSeconds = Math.floor(differenceInTime / 1000);
+
+            document.getElementById("result").innerHTML = "Chúng ta đã bên nhau được:<br>" + 
+                                                            differenceInYears + " Năm, " + 
+                                                            differenceInMonths + " Tháng, " + 
+                                                            differenceInDays + " Ngày, " +
+                                                            differenceInHours + " Giờ, " +
+                                                            differenceInMinutes + " Phút, " +
+                                                            differenceInSeconds + " Giây.";
+        }
+
+        // Update time every second
+        setInterval(updateClock, 1000);
+
+        // Make sure the clock is updated immediately when the page is first loaded
+        updateClock();
+    </script>
+</body>
+</html>
